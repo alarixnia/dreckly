@@ -2,27 +2,35 @@
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.firefox
 
-PKG_SUPPORTED_OPTIONS+=	alsa pulseaudio dbus webrtc
+PKG_SUPPORTED_OPTIONS+=	dbus webrtc
 
-PKG_SUGGESTED_OPTIONS=	dbus
+.include "../../mk/bsd.fast.prefs.mk"
 
+.if ${OPSYS} != "Darwin"
+PKG_SUPPORTED_OPTIONS+=	pulseaudio
+PKG_SUGGESTED_OPTIONS+=	dbus
+.endif
+
+PKG_SUPPORTED_OPTIONS.Linux+=	alsa
 PKG_SUGGESTED_OPTIONS.Linux+=	alsa webrtc
 PKG_SUGGESTED_OPTIONS.NetBSD+=	webrtc
 
 .include "../../mk/bsd.options.mk"
 
-.if !empty(PKG_OPTIONS:Malsa)
+.if ${OPSYS} != "Darwin"
+.  if !empty(PKG_OPTIONS:Malsa)
 CONFIGURE_ARGS+=	--enable-alsa
-.  include "../../audio/alsa-lib/buildlink3.mk"
-.else
+.    include "../../audio/alsa-lib/buildlink3.mk"
+.  else
 CONFIGURE_ARGS+=	--disable-alsa
-.endif
+.  endif
 
-.if !empty(PKG_OPTIONS:Mpulseaudio)
+.  if !empty(PKG_OPTIONS:Mpulseaudio)
 CONFIGURE_ARGS+=	--enable-pulseaudio
-.  include "../../audio/pulseaudio/buildlink3.mk"
-.else
+.    include "../../audio/pulseaudio/buildlink3.mk"
+.  else
 CONFIGURE_ARGS+=	--disable-pulseaudio
+.  endif
 .endif
 
 .if !empty(PKG_OPTIONS:Mdbus)
