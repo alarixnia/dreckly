@@ -103,7 +103,6 @@ DEPENDS+=	libical-[0-9]*:../../time/libical
 DEPENDS+=	arcticfox-[0-9]*:../../www/arcticfox
 DEPENDS+=	cppcms-[0-9]*:../../www/cppcms
 DEPENDS+=	firefox-[0-9]*:../../www/firefox
-DEPENDS+=	firefox115-[0-9]*:../../www/firefox115
 # Not built for recent environments
 #DEPENDS+=	firefox52-[0-9]*:../../www/firefox52
 # Only for PHP 7
