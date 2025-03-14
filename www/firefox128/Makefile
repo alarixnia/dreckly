@@ -53,7 +53,6 @@ CONFIGURE_ARGS+=	--disable-jemalloc
 CONFIGURE_ARGS+=	--disable-tests
 CONFIGURE_ARGS+=	--enable-system-ffi
 CONFIGURE_ARGS+=	--with-system-libvpx
-CONFIGURE_ARGS+=	--with-system-nss
 CONFIGURE_ARGS+=	--with-system-nspr
 CONFIGURE_ARGS+=	--with-system-webp
 CONFIGURE_ARGS+=	--with-system-zlib
@@ -272,7 +271,6 @@ do-test:
 .include "../../devel/libffi/buildlink3.mk"
 BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.18
 .include "../../devel/nspr/buildlink3.mk"
-.include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
@@ -285,6 +283,8 @@ RUST_REQ=	1.23.0
 .include "../../multimedia/libvpx/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .if ${OPSYS} != "Darwin"
+CONFIGURE_ARGS+=	--with-system-nss
+.  include "../../devel/nss/buildlink3.mk"
 .  include "../../graphics/MesaLib/buildlink3.mk"
 .  include "../../x11/libXt/buildlink3.mk"
 .  include "../../x11/gtk3/buildlink3.mk"
