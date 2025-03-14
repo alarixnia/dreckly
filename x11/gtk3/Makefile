@@ -24,6 +24,8 @@ PTHREAD_AUTO_VARS=	yes
 # tests need M_PI, ISO C unacceptable on illumos
 FORCE_C_STD=	gnu99
 
+ALL_ENV+=	LC_ALL="C"
+
 MESON_ARGS+=	-Dgtk_doc=true
 MESON_ARGS+=	-Dman=true
 MESON_ARGS+=	--localedir=${PREFIX}/${PKGLOCALEDIR}/locale
