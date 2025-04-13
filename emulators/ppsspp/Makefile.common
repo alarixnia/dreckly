@@ -46,6 +46,8 @@ CMAKE_CONFIGURE_ARGS+=	-DARMIPS_PRECOMPILE_HEADERS=OFF
 CMAKE_CONFIGURE_ARGS+=	-DENABLE_PCH=OFF
 .endif
 
+CMAKE_CONFIGURE_ARGS.Darwin+=	-DARM_NO_VULKAN=ON
+
 .include "../../devel/cmake/build.mk"
 .include "../../archivers/libzip/buildlink3.mk"
 .include "../../archivers/zstd/buildlink3.mk"
