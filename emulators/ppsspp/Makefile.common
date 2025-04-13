@@ -22,10 +22,8 @@ USE_CXX_FEATURES+=	c++17
 
 LDFLAGS.NetBSD+=	-lrt
 
-# currently there are rendering problems
-CMAKE_CONFIGURE_ARGS+=	-DUSE_FFMPEG=OFF
-
 # use libraries from pkgsrc
+CMAKE_CONFIGURE_ARGS+=	-DUSE_SYSTEM_FFMPEG=ON
 CMAKE_CONFIGURE_ARGS+=	-DUSE_SYSTEM_LIBZIP=ON
 CMAKE_CONFIGURE_ARGS+=	-DUSE_SYSTEM_LIBSDL2=ON
 CMAKE_CONFIGURE_ARGS+=	-DUSE_SYSTEM_LIBPNG=ON
@@ -55,5 +53,7 @@ CMAKE_CONFIGURE_ARGS+=	-DENABLE_PCH=OFF
 .include "../../graphics/glew/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../lang/python/tool.mk"
+# don't change this, newer versions of ffmpeg break fmv
+.include "../../multimedia/ffmpeg2/buildlink3.mk"
 .include "../../net/miniupnpc/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
